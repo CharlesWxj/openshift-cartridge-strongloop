@@ -193,7 +193,9 @@ function build() {
     
     #  Newer versions of Node set tmp to $HOME/tmp, which is not available
     npm config set tmp $OPENSHIFT_TMP_DIR
-    cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install; 
+	#wxj comment 
+	echo "comment off npm install."
+    #cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install; 
     ln -s $OPENSHIFT_SLS_DIR/strongloop/bin/slc $OPENSHIFT_SLS_DIR/bin/node/
 
     if [ -f "${OPENSHIFT_REPO_DIR}"/deplist.txt ]; then
@@ -216,9 +218,10 @@ function build() {
     # git post receive-hook
     unset GIT_DIR
     unset GIT_WORK_TREE
-
+	#wxj comment 
+	echo "comment off repo npm install."
     if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
-        (cd "${OPENSHIFT_REPO_DIR}"; npm install -d)
+        #(cd "${OPENSHIFT_REPO_DIR}"; npm install -d)
     fi
 
 }
