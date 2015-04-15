@@ -104,7 +104,6 @@ Endpoints:
       - Frontend:      "/health"
         Backend:       ""
         Options:       { health: true }
-
 		
   - Private-IP-Name:   HTTP_IP
     Private-Port-Name: WEB_PORT
