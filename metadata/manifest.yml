@@ -133,7 +133,7 @@ Endpoints:
     Protocols:         [http]
     Mappings:
       - Frontend:      '/pm'
-      - Backend:       ''	  
+      - Backend:       ''  
 
   - Private-IP-Name: IP2
     Private-Port-Name: PORT2
