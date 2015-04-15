@@ -104,7 +104,7 @@ Endpoints:
       - Frontend:      "/health"
         Backend:       ""
         Options:       { health: true }
-		
+
   - Private-IP-Name:   HTTP_IP
     Private-Port-Name: WEB_PORT
     Private-Port:      18080
@@ -138,7 +138,7 @@ Endpoints:
   - Private-IP-Name:   INTERNAL_SERVICE_IP
     Private-Port-Name: 15544
     Public-Port-Name:  INTERNAL_SERVICE_PORT
-	
+
   - Private-IP-Name: IP2
     Private-Port-Name: PORT2
     Private-Port: 19080
@@ -149,7 +149,7 @@ Endpoints:
     Mappings:
       - Frontend: '/wsdemo'
         Backend: ''
-        Options:{websocket: true}		
+        Options:{websocket: true}
 
 Version-Overrides:
   '0.6':
