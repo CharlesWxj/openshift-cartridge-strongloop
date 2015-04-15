@@ -193,10 +193,14 @@ function build() {
     
     #  Newer versions of Node set tmp to $HOME/tmp, which is not available
     npm config set tmp $OPENSHIFT_TMP_DIR
-	#wxj comment 
-	echo "comment off npm install."
+
+	# @wxjg 14/4/2015 - `npm install -d` is too liberal and installs devDependencies.  
+        # Changing to --production to prevent that.
     #cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install; 
+	cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install --production -d;
     ln -s $OPENSHIFT_SLS_DIR/strongloop/bin/slc $OPENSHIFT_SLS_DIR/bin/node/
+	
+
 
     if [ -f "${OPENSHIFT_REPO_DIR}"/deplist.txt ]; then
         mods=$(perl -ne 'print if /^\s*[^#\s]/' "${OPENSHIFT_REPO_DIR}"/deplist.txt)
@@ -218,11 +222,29 @@ function build() {
     # git post receive-hook
     unset GIT_DIR
     unset GIT_WORK_TREE
-	#wxj comment 
-	echo "comment off repo npm install."
-   # if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
-   #     (cd "${OPENSHIFT_REPO_DIR}"; npm install -d)
-   # fi
+
+    if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
+    	# @wxjg 14/4/2015 - `npm install -d` is too liberal and installs devDependencies.  
+        # Changing to --production to prevent that.    
+	#(cd "${OPENSHIFT_REPO_DIR}"; npm install -d)
+	(cd "${OPENSHIFT_REPO_DIR}"; npm install --production -d)
+	fi
+
+# If bower is detected install the bower dependencies
+    if [ -f "${OPENSHIFT_REPO_DIR}"/bower.json ]; then
+		cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install bower -d;
+		ln -s $OPENSHIFT_SLS_DIR/strongloop/node_modules/bower/bin/bower $OPENSHIFT_SLS_DIR/bin/node/
+	
+        (HOME=$HOME/app-root/runtime; cd "${OPENSHIFT_REPO_DIR}"; bower install --production)
+			# @wxjg 14/4/2015 - install bower by default 
+		
+	
+    fi
+
+    # If there is a grunt file, run $ grunt prod
+    #if [ -f "${OPENSHIFT_REPO_DIR}"/Gruntfile.js ]; then
+    #    (cd "${OPENSHIFT_REPO_DIR}"; node_modules/grunt-cli/bin/grunt prod)
+    #fi
 
 }
 
