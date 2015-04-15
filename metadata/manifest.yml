@@ -1,6 +1,6 @@
 Name: strongloop
 Cartridge-Short-Name: SLS
-Display-Name: StrongLoop Suite 
+Display-Name: StrongLoop Suite - custom
 Description: "StrongLoop includes LoopBack, an open source mobile framework for creating RESTful, JSON, and other APIs. LoopBack ships with a mobile SDK and can be easily extended via community npm modules. Also included in StrongLoop is StrongOps, an operational console specifically for Node.js applications. StrongOps provides deep performance monitoring including CPU profiling, event loop statistics, and more."
 Version: "0.10.30"
 Versions: ['0.10.30']
@@ -109,8 +109,8 @@ Endpoints:
     Private-Port-Name: WEB_PORT
     Private-Port:      18080
     Public-Port-Name:  WEB_PROXY_PORT
-    [variable]#Protocols#:         [ws]
-    [variable]#Mappings#:
+    Protocols:         [ws]
+    Mappings:
       - Frontend:      '/web'
         Backend:       '/web'
       - Frontend:      '/ws'
@@ -121,8 +121,8 @@ Endpoints:
     Private-Port-Name: ADMIN_PORT
     Private-Port:      19000
     Public-Port-Name:  ADMIN_PROXY_PORT
-    [variable]#Protocols#:         [http]
-    [variable]#Mappings#:
+    Protocols:         [http]
+    Mappings:
       - Frontend:      '/admin'
       - Backend:       '/admin'
 
@@ -130,8 +130,8 @@ Endpoints:
     Private-Port-Name: PM_PORT
     Private-Port:      21000
     Public-Port-Name:  PM_PROXY_PORT
-    [variable]#Protocols#:         [http]
-    [variable]#Mappings#:
+    Protocols:         [http]
+    Mappings:
       - Frontend:      '/pm'
       - Backend:       ''	  
 
@@ -144,10 +144,10 @@ Endpoints:
   Private-Port-Name: PORT2
   Private-Port: 19080
   Public-Port-Name: PROXY_PORT2
-  [variable]#Protocols#:
+  Protocols:
   - http
   - ws
-  [variable]#Mappings#:
+  Mappings:
   - Frontend: '/wsdemo'
     Backend: ''
     Options:{websocket: true}		
