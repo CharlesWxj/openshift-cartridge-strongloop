@@ -105,6 +105,7 @@ Endpoints:
         Backend:       ""
         Options:       { health: true }
 
+		
   - Private-IP-Name:   HTTP_IP
     Private-Port-Name: WEB_PORT
     Private-Port:      18080
@@ -135,22 +136,21 @@ Endpoints:
       - Frontend:      '/pm'
       - Backend:       ''	  
 
-
   - Private-IP-Name:   INTERNAL_SERVICE_IP
     Private-Port-Name: 15544
     Public-Port-Name:  INTERNAL_SERVICE_PORT
 	
-- Private-IP-Name: IP2
-  Private-Port-Name: PORT2
-  Private-Port: 19080
-  Public-Port-Name: PROXY_PORT2
-  Protocols:
-  - http
-  - ws
-  Mappings:
-  - Frontend: '/wsdemo'
-    Backend: ''
-    Options:{websocket: true}		
+  - Private-IP-Name: IP2
+    Private-Port-Name: PORT2
+    Private-Port: 19080
+    Public-Port-Name: PROXY_PORT2
+    Protocols:
+    - http
+    - ws
+    Mappings:
+      - Frontend: '/wsdemo'
+        Backend: ''
+        Options:{websocket: true}		
 
 Version-Overrides:
   '0.6':
