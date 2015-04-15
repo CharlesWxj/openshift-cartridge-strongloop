@@ -104,6 +104,54 @@ Endpoints:
       - Frontend:      "/health"
         Backend:       ""
         Options:       { health: true }
+
+  - Private-IP-Name:   HTTP_IP
+    Private-Port-Name: WEB_PORT
+    Private-Port:      18080
+    Public-Port-Name:  WEB_PROXY_PORT
+    [variable]#Protocols#:         [ws]
+    [variable]#Mappings#:
+      - Frontend:      '/web'
+        Backend:       '/web'
+      - Frontend:      '/ws'
+        Backend:       '/ws'
+        Options:       { "websocket": true }
+
+  - Private-IP-Name:   HTTP_IP
+    Private-Port-Name: ADMIN_PORT
+    Private-Port:      19000
+    Public-Port-Name:  ADMIN_PROXY_PORT
+    [variable]#Protocols#:         [http]
+    [variable]#Mappings#:
+      - Frontend:      '/admin'
+      - Backend:       '/admin'
+
+  - Private-IP-Name:   PM_IP
+    Private-Port-Name: PM_PORT
+    Private-Port:      21000
+    Public-Port-Name:  PM_PROXY_PORT
+    [variable]#Protocols#:         [http]
+    [variable]#Mappings#:
+      - Frontend:      '/pm'
+      - Backend:       ''	  
+
+
+  - Private-IP-Name:   INTERNAL_SERVICE_IP
+    Private-Port-Name: 15544
+    Public-Port-Name:  INTERNAL_SERVICE_PORT
+	
+- Private-IP-Name: IP2
+  Private-Port-Name: PORT2
+  Private-Port: 19080
+  Public-Port-Name: PROXY_PORT2
+  [variable]#Protocols#:
+  - http
+  - ws
+  [variable]#Mappings#:
+  - Frontend: '/wsdemo'
+    Backend: ''
+    Options:{websocket: true}		
+
 Version-Overrides:
   '0.6':
     Display-Name: NodeJS 0.6
