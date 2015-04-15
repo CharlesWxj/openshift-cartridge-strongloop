@@ -135,10 +135,6 @@ Endpoints:
       - Frontend:      '/pm'
       - Backend:       ''	  
 
-  - Private-IP-Name:   INTERNAL_SERVICE_IP
-    Private-Port-Name: 15544
-    Public-Port-Name:  INTERNAL_SERVICE_PORT
-
   - Private-IP-Name: IP2
     Private-Port-Name: PORT2
     Private-Port: 19080
