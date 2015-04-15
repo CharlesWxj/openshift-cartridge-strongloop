@@ -22,7 +22,7 @@ done
 ###
 pushd $OPENSHIFT_SLS_DIR > /dev/null
 for dir in conf logs sessions run tmp; do
-	mkdir -p $dir
+   mkdir -p $dir
 done
 popd > /dev/null
 

@@ -176,7 +176,7 @@ function restart() {
 
 function build() {
     if [ -d "${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules" ]; then
-        node_modules_dir="${OPENSHIFT_REPO_DIR}node_modules/"
+        node_modules_dir="${OPENSHIFT_REPO_DIR}/node_modules/"
         for d in `ls -a ${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules`; do
             [ -e "${node_modules_dir}$d" ]  ||  \
                 mv "${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules/$d" "$node_modules_dir"
@@ -194,13 +194,11 @@ function build() {
     #  Newer versions of Node set tmp to $HOME/tmp, which is not available
     npm config set tmp $OPENSHIFT_TMP_DIR
 
-	# @wxjg 14/4/2015 - `npm install -d` is too liberal and installs devDependencies.  
+    # @wxjg 14/4/2015 - `npm install -d` is too liberal and installs devDependencies.  
         # Changing to --production to prevent that.
     #cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install; 
-	cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install --production -d;
+    cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install --production -d;
     ln -s $OPENSHIFT_SLS_DIR/strongloop/bin/slc $OPENSHIFT_SLS_DIR/bin/node/
-	
-
 
     if [ -f "${OPENSHIFT_REPO_DIR}"/deplist.txt ]; then
         mods=$(perl -ne 'print if /^\s*[^#\s]/' "${OPENSHIFT_REPO_DIR}"/deplist.txt)
@@ -224,21 +222,21 @@ function build() {
     unset GIT_WORK_TREE
 
     if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
-    	# @wxjg 14/4/2015 - `npm install -d` is too liberal and installs devDependencies.  
+    # @wxjg 14/4/2015 - `npm install -d` is too liberal and installs devDependencies.  
         # Changing to --production to prevent that.    
-	#(cd "${OPENSHIFT_REPO_DIR}"; npm install -d)
-	(cd "${OPENSHIFT_REPO_DIR}"; npm install --production -d)
-	fi
+    #(cd "${OPENSHIFT_REPO_DIR}"; npm install -d)
+     (cd "${OPENSHIFT_REPO_DIR}"; npm install --production -d)
+    fi
 
 # If bower is detected install the bower dependencies
     if [ -f "${OPENSHIFT_REPO_DIR}"/bower.json ]; then
-		cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install bower -d;
-		ln -s $OPENSHIFT_SLS_DIR/strongloop/node_modules/bower/bin/bower $OPENSHIFT_SLS_DIR/bin/node/
-	
-        (HOME=$HOME/app-root/runtime; cd "${OPENSHIFT_REPO_DIR}"; bower install --production)
-			# @wxjg 14/4/2015 - install bower by default 
-		
-	
+      # @wxjg 14/4/2015 - install bower by default 
+        cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install bower -d;
+        ln -s $OPENSHIFT_SLS_DIR/strongloop/node_modules/bower/bin/bower $OPENSHIFT_SLS_DIR/bin/node/
+
+        (export HOME=$HOME/app-root/runtime; cd "${OPENSHIFT_REPO_DIR}"; bower install --production)
+        
+
     fi
 
     # If there is a grunt file, run $ grunt prod
@@ -280,7 +278,7 @@ function pre-build() {
     rm -rf ${OPENSHIFT_SLS_DIR}/tmp/{node_modules,saved.node_modules}
 
     # If the node_modules/ directory exists, then "stash" it away for redeploy.
-    node_modules_dir="${OPENSHIFT_REPO_DIR}node_modules"
+    node_modules_dir="${OPENSHIFT_REPO_DIR}/node_modules"
     if [ -d "$node_modules_dir" ]; then
       echo 'Saving away previously installed Node modules'
       mv "$node_modules_dir" "${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules"
@@ -293,7 +291,7 @@ function tidy() {
   client_message "Emptying log dir: $OPENSHIFT_SLS_LOG_DIR"
   shopt -s dotglob
   rm -rf $OPENSHIFT_SLS_LOG_DIR/*
-  rm -rf ${OPENSHIFT_SLS_DIR}tmp/*
+  rm -rf ${OPENSHIFT_SLS_DIR}/tmp/*
 }
 
 #
