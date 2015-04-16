@@ -114,10 +114,10 @@ Endpoints:
         Backend:       ''  
       - Frontend:      "/test"
         Backend:       ""
-        Options:       { test: true}
+        Options:       { health: true}
       - Frontend:      "/demo"
         Backend:       "demo"
-        Options:       { test: true}
+        Options:       { health: true}
 
   - Private-IP-Name: IP2
     Private-Port-Name: PORT2
