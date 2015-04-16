@@ -175,6 +175,11 @@ function restart() {
 }  #  End of function  restart.
 
 function build() {
+    echo "pls run full-build."
+
+}  #  End of function  build
+
+function full-build() {
     if [ -d "${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules" ]; then
         node_modules_dir="${OPENSHIFT_REPO_DIR}/node_modules/"
         for d in `ls -a ${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules`; do
@@ -314,6 +319,7 @@ case "$1" in
     build)               build       ;;
     pre-build)           pre-build   ;;
     post-deploy)         post-deploy ;;
+    full-build)         full-build ;;
     tidy)                tidy        ;;
     *) exit 0;
 esac
