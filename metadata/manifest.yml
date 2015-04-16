@@ -111,7 +111,13 @@ Endpoints:
     Public-Port-Name:  PM_PROXY_PORT   
     Mappings:
       - Frontend:      '/pm'
-      - Backend:       ''  
+        Backend:       ''  
+      - Frontend:      "/test"
+        Backend:       ""
+        Options:       { test: 123,abc:'abc' }
+      - Frontend:      "/demo"
+        Backend:       "demo"
+        Options:       { test: 1234,abc:'abcd' }
 
   - Private-IP-Name: IP2
     Private-Port-Name: PORT2
@@ -120,6 +126,9 @@ Endpoints:
     Mappings:
       - Frontend: '/ws'
         Backend: ''
+        Options:{websocket: true}
+      - Frontend: '/ws1'
+        Backend: 'ws1'
         Options:{websocket: true}
 
 Version-Overrides:

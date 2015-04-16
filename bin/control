@@ -234,9 +234,7 @@ function build() {
         cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install bower -d;
         ln -s $OPENSHIFT_SLS_DIR/strongloop/node_modules/bower/bin/bower $OPENSHIFT_SLS_DIR/bin/node/
 
-        (export HOME=$HOME/app-root/runtime; cd "${OPENSHIFT_REPO_DIR}"; bower install --production)
-        
-
+        (export HOME=$HOME/app-root/runtime; cd "${OPENSHIFT_REPO_DIR}"; bower install --production --config.interactive=false)       
     fi
 
     # If there is a grunt file, run $ grunt prod
