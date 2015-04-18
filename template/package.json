@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-	"start": "slc run --cluster 2",
+    "start": "slc run --cluster 2",
     "test": "grunt test",
     "build": "bower install; grunt build"
   },
