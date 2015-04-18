@@ -124,27 +124,16 @@ Endpoints:
     Mappings:
       - Frontend:      /pm
         Backend:       /
-      - Frontend:      /test
-        Backend:       /test
-        Options:       { health: true}
-      - Frontend:      /file
-        Backend:       /file
-        Options:       { file: true}
       - Frontend:      /gone
         Backend:       /gone
         Options:       { gone: true}
-      - Frontend:      /forbidden
-        Backend:       /forbidden
-        Options:       { forbidden: true}
       - Frontend:      /noproxy
         Backend:       /noproxyv
         Options:       { noproxy: true}
       - Frontend:      /redirect
         Backend:       /redirect
         Options:       { redirect: true}
-      - Frontend:      /tohttps
-        Backend:       /tohttps
-        Options:       { tohttps: true}
+
 
   - Private-IP-Name: IP2
     Private-Port-Name: PORT2
