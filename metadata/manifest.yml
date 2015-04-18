@@ -12,7 +12,6 @@ Website: "http://strongloop.com/"
 Install-Build-Required: true
 Cartridge-Version: 0.10.31
 Cartridge-Vendor: strongloop
-Compatible-Versions:[]
 Categories:
   - service
   - javascript
