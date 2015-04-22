@@ -8,8 +8,11 @@ esac
 
 #if [[ "$version" == "1.0.0" ]]
 #then
-    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/node $OPENSHIFT_SLS_DIR/bin/node/
-    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/npm $OPENSHIFT_SLS_DIR/bin/node/
+#@wxj 22.4.2015 change to /bin folder
+    #ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/node $OPENSHIFT_SLS_DIR/bin/node/
+    #ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/npm $OPENSHIFT_SLS_DIR/bin/node/
+	ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/node $OPENSHIFT_SLS_DIR/bin/
+    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/npm $OPENSHIFT_SLS_DIR/bin/
 #    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/slc $OPENSHIFT_SLS_DIR/bin/node/
 #    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/slnode $OPENSHIFT_SLS_DIR/bin/node/
 #    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/lb  $OPENSHIFT_SLS_DIR/bin/node/
