@@ -189,7 +189,7 @@ function full-build() {
         rm -rf "${OPENSHIFT_SLS_DIR}tmp/saved.node_modules"
     fi
 
-    if [ -f "${OPENSHIFT_REPO_DIR}.openshift/markers/force_clean_build" ]; then
+    if [ -f "${OPENSHIFT_REPO_DIR}/.openshift/markers/force_clean_build" ]; then
         echo ".openshift/markers/force_clean_build found!  Recreating npm modules" 1>&2
         rm -rf "${OPENSHIFT_SLS_DIR}"/node_modules/*
         rm -rf "${OPENSHIFT_HOMEDIR}"/.npm/*
