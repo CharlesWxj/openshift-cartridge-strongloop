@@ -180,16 +180,16 @@ function build() {
 }  #  End of function  build
 
 function full-build() {
-    if [ -d "${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules" ]; then
-        node_modules_dir="${OPENSHIFT_REPO_DIR}/node_modules/"
-        for d in `ls -a ${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules`; do
+    if [ -d "${OPENSHIFT_SLS_DIR}tmp/saved.node_modules" ]; then
+        node_modules_dir="${OPENSHIFT_REPO_DIR}node_modules/"
+        for d in `ls -a ${OPENSHIFT_SLS_DIR}tmp/saved.node_modules`; do
             [ -e "${node_modules_dir}$d" ]  ||  \
-                mv "${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules/$d" "$node_modules_dir"
+                mv "${OPENSHIFT_SLS_DIR}tmp/saved.node_modules/$d" "$node_modules_dir"
         done
-        rm -rf "${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules"
+        rm -rf "${OPENSHIFT_SLS_DIR}tmp/saved.node_modules"
     fi
 
-    if [ -f "${OPENSHIFT_REPO_DIR}/.openshift/markers/force_clean_build" ]; then
+    if [ -f "${OPENSHIFT_REPO_DIR}.openshift/markers/force_clean_build" ]; then
         echo ".openshift/markers/force_clean_build found!  Recreating npm modules" 1>&2
         rm -rf "${OPENSHIFT_SLS_DIR}"/node_modules/*
         rm -rf "${OPENSHIFT_HOMEDIR}"/.npm/*
@@ -202,10 +202,12 @@ function full-build() {
     # @wxjg 14/4/2015 - `npm install -d` is too liberal and installs devDependencies.  
         # Changing to --production to prevent that.
     #cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install; 
-    cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install --production -d;
+    cd "${OPENSHIFT_SLS_DIR}strongloop"; npm install --production -d;
     
     chmod u+x $OPENSHIFT_SLS_DIR/strongloop/bin/slc
-    ln -s $OPENSHIFT_SLS_DIR/strongloop/bin/slc $OPENSHIFT_SLS_DIR/bin/node/
+    #@wxj 22.04.2015 change to bin folder
+	#ln -s $OPENSHIFT_SLS_DIR/strongloop/bin/slc $OPENSHIFT_SLS_DIR/bin/node/
+	ln -s $OPENSHIFT_SLS_DIR/strongloop/bin/slc $OPENSHIFT_SLS_DIR/bin/
 
     if [ -f "${OPENSHIFT_REPO_DIR}"/deplist.txt ]; then
         mods=$(perl -ne 'print if /^\s*[^#\s]/' "${OPENSHIFT_REPO_DIR}"/deplist.txt)
@@ -238,8 +240,10 @@ function full-build() {
 # If bower is detected install the bower dependencies
     if [ -f "${OPENSHIFT_REPO_DIR}"/bower.json ]; then
       # @wxjg 14/4/2015 - install bower by default 
-        cd "${OPENSHIFT_SLS_DIR}/strongloop"; npm install bower -d;
-        ln -s $OPENSHIFT_SLS_DIR/strongloop/node_modules/bower/bin/bower $OPENSHIFT_SLS_DIR/bin/node/
+        cd "${OPENSHIFT_SLS_DIR}strongloop"; npm install bower -d;
+		# @wxjg 22/4/2015 - change to bin folder 
+        #ln -s $OPENSHIFT_SLS_DIR/strongloop/node_modules/bower/bin/bower $OPENSHIFT_SLS_DIR/bin/node/
+		ln -s $OPENSHIFT_SLS_DIR/strongloop/node_modules/bower/bin/bower $OPENSHIFT_SLS_DIR/bin/
 
         (HOME=$HOME/app-root/runtime; cd "${OPENSHIFT_REPO_DIR}"; bower install --production --config.interactive=false)       
     fi
@@ -256,7 +260,7 @@ function is_supervisor_running() {
     [ -f "$OPENSHIFT_SLS_PID_DIR/node.pid" ]  ||  return 1
 
     #  Have a valid pid, use it - otherwise return not supervisor.
-    nodepid=$(cat "${OPENSHIFT_SLS_PID_DIR}/node.pid")
+    nodepid=$(cat "${OPENSHIFT_SLS_PID_DIR}node.pid")
     [ -n "$nodepid" ]  ||  return 1
 
     #  Is the pid a supervisor process.
@@ -283,10 +287,10 @@ function pre-build() {
     rm -rf ${OPENSHIFT_SLS_DIR}/tmp/{node_modules,saved.node_modules}
 
     # If the node_modules/ directory exists, then "stash" it away for redeploy.
-    node_modules_dir="${OPENSHIFT_REPO_DIR}/node_modules"
+    node_modules_dir="${OPENSHIFT_REPO_DIR}node_modules"
     if [ -d "$node_modules_dir" ]; then
       echo 'Saving away previously installed Node modules'
-      mv "$node_modules_dir" "${OPENSHIFT_SLS_DIR}/tmp/saved.node_modules"
+      mv "$node_modules_dir" "${OPENSHIFT_SLS_DIR}tmp/saved.node_modules"
       mkdir -p "$node_modules_dir"
     fi
 }
@@ -296,7 +300,7 @@ function tidy() {
   client_message "Emptying log dir: $OPENSHIFT_SLS_LOG_DIR"
   shopt -s dotglob
   rm -rf $OPENSHIFT_SLS_LOG_DIR/*
-  rm -rf ${OPENSHIFT_SLS_DIR}/tmp/*
+  rm -rf ${OPENSHIFT_SLS_DIR}tmp/*
 }
 
 #
