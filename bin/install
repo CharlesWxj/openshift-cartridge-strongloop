@@ -11,8 +11,9 @@ esac
 #@wxj 22.4.2015 change to /bin folder
     #ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/node $OPENSHIFT_SLS_DIR/bin/node/
     #ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/npm $OPENSHIFT_SLS_DIR/bin/node/
-	ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/node $OPENSHIFT_SLS_DIR/bin/
-    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/npm $OPENSHIFT_SLS_DIR/bin/
+#@wxj 22.4.2015 comment off in order to use N to switch version
+	#ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/node $OPENSHIFT_SLS_DIR/bin/
+    #ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/npm $OPENSHIFT_SLS_DIR/bin/
 #    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/slc $OPENSHIFT_SLS_DIR/bin/node/
 #    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/slnode $OPENSHIFT_SLS_DIR/bin/node/
 #    ln -sf $OPENSHIFT_SLS_DIR/versions/$version/bin/lb  $OPENSHIFT_SLS_DIR/bin/node/
