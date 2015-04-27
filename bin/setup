@@ -19,6 +19,12 @@ for dir in configuration etc; do
     cp -Lr $OPENSHIFT_SLS_DIR/versions/$version/$dir/* $OPENSHIFT_SLS_DIR/$dir 
 done
 
+#@wxj 27.4.2015  Copy the version specific files bin lib to nodejs directory
+shopt -s dotglob
+for dir in bin lib; do    
+    cp -fR $OPENSHIFT_SLS_DIR/versions/$version/$dir/ $OPENSHIFT_SLS_DIR/ 
+done
+
 ###
 pushd $OPENSHIFT_SLS_DIR > /dev/null
 for dir in conf logs sessions run tmp; do

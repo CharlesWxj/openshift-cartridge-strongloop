@@ -7,13 +7,6 @@ case "$1" in
 esac
 
 
-#@wxj 27.4.2015  Copy the version specific files bin lib to nodejs directory
-shopt -s dotglob
-for dir in bin lib; do    
-    cp -Lr $OPENSHIFT_SLS_DIR/versions/$version/$dir/* $OPENSHIFT_SLS_DIR/$dir 
-done
-
-
 #if [[ "$version" == "1.0.0" ]]
 #then
 #@wxj 22.4.2015 change to /bin folder
